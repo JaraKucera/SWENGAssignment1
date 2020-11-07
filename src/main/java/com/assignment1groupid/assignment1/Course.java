@@ -43,7 +43,7 @@ public class Course {
     }
 
     public void addStudent(Student s){
-        students.add(s);
+        students.add(s); //Student can study course but not necessarily all modules in course
     }
     
     //removes student from this student list
@@ -67,12 +67,14 @@ public class Course {
     
     public void addModule(Module m){
         modules.add(m);
+        m.addCourse(this); //If module included in course, course included in module
     }
     
     //removes student from this student list
     public void removeModule(int moduleID){
         for(int i = 0; i < modules.size(); i++){
             if(modules.get(i).getModuleID() == moduleID){
+                modules.get(i).removeCourse(this.getCourseName()); //Course contained in courses list of module must be removed
                 modules.remove(i);
                 break;
             }
