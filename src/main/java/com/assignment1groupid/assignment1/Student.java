@@ -24,16 +24,19 @@ public class Student {
     
     public void addCourse(Course c){
         courses.add(c);
+        c.addStudent(this); //If student is taking a course, student must be included in 
     }
     
     public void addModule(Module m){
         modules.add(m);
+        m.addStudent(this); //if student is studying a module, module must include student
     }
     
     //removes student from this student list
     public void removeModule(int moduleID){
         for(int i = 0; i < modules.size(); i++){
             if(modules.get(i).getModuleID() == moduleID){
+                modules.get(i).removeStudent(this.getID()); //if student is no longer studying a module, they must be removed from the student list in modules
                 modules.remove(i);
                 break;
             }
@@ -43,6 +46,7 @@ public class Student {
     public void removeCourse(Course c){
         for(int i = 0; i < courses.size(); i++){
             if(courses.get(i).getCourseName().equals(c.getCourseName())){
+                courses.get(i).removeStudent(this.getID()); //if student is no longer studying a course, they must be removed from the student list in course
                 courses.remove(i);
                 break;
             }
