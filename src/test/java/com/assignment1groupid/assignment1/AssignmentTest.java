@@ -10,12 +10,26 @@ public class AssignmentTest {
     
     @Test
     public void testStudentUsername(){
+        //Test to check username generation
         Student s = new Student("John",18, "01/02/2002", 989784);
         assertEquals("John18", s.getUsername());
     }
     
     @Test
+    public void testCourseStudent(){
+        //Test to ensure that the course is correctly added to student and that student is added to course
+        Student s = new Student("John",18, "01/02/2002", 989784);
+        Course c = new Course("CT404", new DateTime("2020-08-01"), new DateTime("2020-12-20"));
+        s.addCourse(c);
+        assertTrue(c.studyingStudents(s));
+        s.removeCourse(c);
+        assertFalse(s.studiesCourse(c));
+        assertFalse(c.studyingStudents(s));
+    }
+    
+    @Test
     public void testCourseInStudent(){
+        //Test to ensure that courses are correctly removed
         Student s = new Student("John",18, "01/02/2002", 989784);
         Course c = new Course("CT404", new DateTime("2020-08-01"), new DateTime("2020-12-20"));
         s.addCourse(c);
@@ -29,6 +43,7 @@ public class AssignmentTest {
     
     @Test
     public void testModuleInStudent(){
+        //Module test to ensure compatibility with student
         Student s = new Student("John",18, "01/02/2002", 989784);
         Module m = new Module("Systems", 11256);
         s.addModule(m);
@@ -42,12 +57,12 @@ public class AssignmentTest {
     
     @Test
     public void testCourse(){
+        //Student course and module test compatibility
         Student s = new Student("John",18, "01/02/2002", 989784);
         Course c = new Course("CT404", new DateTime("2020-08-01"), new DateTime("2020-12-20"));
         c.addStudent(s);
         Module m = new Module("Systems", 11256);
         c.addModule(m);
-        
         Student s1 = new Student("John",18, "01/02/2002", 989784);
         Module m1 = new Module("Systems", 11256);
         assertTrue(c.containsModule(m1));
@@ -56,15 +71,14 @@ public class AssignmentTest {
     
     @Test
     public void testModule(){
+        //Inclusion module test
         Student s = new Student("John",18, "01/02/2002", 989784);
         Course c = new Course("CT404", new DateTime("2020-08-01"), new DateTime("2020-12-20"));
         Module m = new Module("Systems", 11256);
-        
         m.addCourse(c);
         m.addStudent(s);
         Course c1 = new Course("CT404", new DateTime("2020-08-01"), new DateTime("2020-12-20"));
         Student s1 = new Student("John",18, "01/02/2002", 989784);
-        
         assertTrue(m.includedInCourse(c1));
         assertTrue(m.studyingStudents(s1));
     }
