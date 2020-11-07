@@ -63,7 +63,7 @@ public class Student {
     
     //Returns a string of courses that offer this module
     public String moduleList(){
-        String listofModules = "Student "+this.name+" takes the following courses:\n";
+        String listofModules = "Student "+this.name+" takes the following modules:\n";
         for(Module m : modules){
             listofModules += m.getModuleName() + "\n";
         }
